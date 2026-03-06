@@ -14,7 +14,6 @@ public class PalindromeCheckerApp {
         Queue<Character> queue = new LinkedList<>();
         Stack<Character> stack = new Stack<>();
 
-        // Enqueue and Push characters
         for (int i = 0; i < input.length(); i++) {
             char ch = input.charAt(i);
             queue.add(ch);   // Enqueue
@@ -31,7 +30,6 @@ public class PalindromeCheckerApp {
             }
         }
 
-        // Print Result
         if (isPalindrome) {
             System.out.println("The string is a palindrome.");
         } else {
