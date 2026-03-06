@@ -1,39 +1,37 @@
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
 import java.util.Scanner;
 
 public class PalindromeCheckerApp {
 
+    // Recursive method to check palindrome
+    public static boolean isPalindrome(String str, int start, int end) {
+
+        // Base condition
+        if (start >= end) {
+            return true;
+        }
+
+        // If characters don't match
+        if (str.charAt(start) != str.charAt(end)) {
+            return false;
+        }
+
+        // Recursive call
+        return isPalindrome(str, start + 1, end - 1);
+    }
+
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
+
         System.out.print("Enter a string: ");
-        String input = scanner.nextLine().toLowerCase();
+        String input = scanner.nextLine().replaceAll("\\s+", "").toLowerCase();
 
-        Queue<Character> queue = new LinkedList<>();
-        Stack<Character> stack = new Stack<>();
+        boolean result = isPalindrome(input, 0, input.length() - 1);
 
-        for (int i = 0; i < input.length(); i++) {
-            char ch = input.charAt(i);
-            queue.add(ch);   // Enqueue
-            stack.push(ch);  // Push
-        }
-
-        boolean isPalindrome = true;
-
-        // Compare Dequeue vs Pop
-        while (!queue.isEmpty()) {
-            if (queue.remove() != stack.pop()) {
-                isPalindrome = false;
-                break;
-            }
-        }
-
-        if (isPalindrome) {
-            System.out.println("The string is a palindrome.");
+        if (result) {
+            System.out.println("The string is a Palindrome.");
         } else {
-            System.out.println("The string is NOT a palindrome.");
+            System.out.println("The string is NOT a Palindrome.");
         }
 
         scanner.close();
