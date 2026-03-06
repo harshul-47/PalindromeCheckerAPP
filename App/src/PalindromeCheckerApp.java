@@ -1,43 +1,45 @@
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Scanner;
 
 public class PalindromeCheckerApp {
 
-    public static void main(String[] args) {
+    public static boolean isPalindrome(String input) {
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a string: ");
-        String input = scanner.nextLine().toLowerCase();
+        Deque<Character> deque = new ArrayDeque<>();
 
-        Queue<Character> queue = new LinkedList<>();
-        Stack<Character> stack = new Stack<>();
-
-        // Enqueue and Push characters
-        for (int i = 0; i < input.length(); i++) {
-            char ch = input.charAt(i);
-            queue.add(ch);   // Enqueue
-            stack.push(ch);  // Push
+        // Insert characters into deque
+        for (char c : input.toCharArray()) {
+            deque.addLast(c);
         }
 
-        boolean isPalindrome = true;
+        // Compare front and rear characters
+        while (deque.size() > 1) {
 
-        // Compare Dequeue vs Pop
-        while (!queue.isEmpty()) {
-            if (queue.remove() != stack.pop()) {
-                isPalindrome = false;
-                break;
+            char front = deque.removeFirst();
+            char rear = deque.removeLast();
+
+            if (front != rear) {
+                return false;
             }
         }
 
-        // Print Result
-        if (isPalindrome) {
-            System.out.println("The string is a palindrome.");
+        return true;
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter a string: ");
+        String input = sc.nextLine();
+
+        if (isPalindrome(input)) {
+            System.out.println("The string is a Palindrome.");
         } else {
-            System.out.println("The string is NOT a palindrome.");
+            System.out.println("The string is NOT a Palindrome.");
         }
 
-        scanner.close();
+        sc.close();
     }
 }
