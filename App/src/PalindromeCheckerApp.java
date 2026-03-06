@@ -2,21 +2,25 @@ import java.util.Scanner;
 
 public class PalindromeCheckerApp {
 
-    // Recursive method to check palindrome
-    public static boolean isPalindrome(String str, int start, int end) {
+    // Method to check palindrome
+    public static boolean isPalindrome(String str) {
 
-        // Base condition
-        if (start >= end) {
-            return true;
+        // Normalize the string
+        str = str.replaceAll("\\s+", "").toLowerCase();
+
+        int left = 0;
+        int right = str.length() - 1;
+
+        // Compare characters
+        while (left < right) {
+            if (str.charAt(left) != str.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
         }
 
-        // If characters don't match
-        if (str.charAt(start) != str.charAt(end)) {
-            return false;
-        }
-
-        // Recursive call
-        return isPalindrome(str, start + 1, end - 1);
+        return true;
     }
 
     public static void main(String[] args) {
@@ -24,12 +28,10 @@ public class PalindromeCheckerApp {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter a string: ");
-        String input = scanner.nextLine().replaceAll("\\s+", "").toLowerCase();
+        String input = scanner.nextLine();
 
-        boolean result = isPalindrome(input, 0, input.length() - 1);
-
-        if (result) {
-            System.out.println("The string is a Palindrome.");
+        if (isPalindrome(input)) {
+            System.out.println("The string is a Palindrome (ignoring spaces and case).");
         } else {
             System.out.println("The string is NOT a Palindrome.");
         }
